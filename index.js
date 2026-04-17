@@ -1,5 +1,15 @@
 const { Client } = require('discord.js-selfbot-v13');
-const config = require('./config.json');
+// const config = require('./config.json');
+
+const config = process.env.APP_CONFIG ? JSON.parse(process.env.APP_CONFIG) : null;
+
+if (!config) {
+    console.error("Error: Variabel APP_CONFIG tidak ditemukan di Railway!");
+    process.exit(1);
+}
+
+// Sekarang kamu tetap bisa pakai config.token, config.activities, dll.
+const token = config.token;
 
 const client = new Client({ checkUpdate: false });
 
