@@ -1,0 +1,16 @@
+{
+  "name": "discord-custom-activity",
+  "version": "1.0.0",
+  "description": "Discord always-on custom activity (self-bot)",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "discord.js-selfbot-v13": "^3.3.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.0"
+  }
+}

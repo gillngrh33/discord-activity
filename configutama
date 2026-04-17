@@ -1,0 +1,41 @@
+{
+  "token": "TOKEN USER DISCORD ANDA",
+
+  "status": "idle",
+
+  "rotateIntervalMinutes": 30,
+
+  "activities": [
+    {
+      "name": "Spotify",
+      "type": 2,
+      "details": "lo-fi hip hop radio",
+      "state": "beats to relax/study to"
+    },
+    {
+      "name": "Visual Studio Code",
+      "type": 0,
+      "details": "Editing index.js",
+      "state": "In a workspace"
+    },
+    {
+      "name": "Twitch",
+      "type": 1,
+      "url": "https://www.twitch.tv/twitch",
+      "details": "Just Chatting",
+      "state": "Live now"
+    },
+    {
+      "name": "YouTube",
+      "type": 3,
+      "details": "lofi girl",
+      "state": "1.2M watching"
+    },
+    {
+      "name": "Chess.com",
+      "type": 5,
+      "details": "Rapid 10+0",
+      "state": "1450 elo"
+    }
+  ]
+}
