@@ -39,3 +39,42 @@
     }
   ]
 }
+
+{
+  "token": "USER_TOKEN_KAMU_DI_SINI",
+  "applicationId": "APPLICATION_ID_DARI_DEVELOPER_PORTAL",
+  "status": "online",
+  "rotateIntervalMinutes": 30,
+  "activities": [
+    {
+      "name": "Nama Aplikasi Kamu",
+      "type": 0,
+      "details": "Baris kedua activity",
+      "state": "Baris ketiga activity",
+      "largeImage": "logo",
+      "largeImageText": "Tooltip saat hover gambar besar",
+      "smallImage": "icon_kecil",
+      "smallImageText": "Tooltip gambar kecil"
+    },
+    {
+      "name": "Music Player",
+      "type": 2,
+      "details": "lofi hip hop radio",
+      "state": "beats to relax/study to",
+      "largeImage": "music_cover",
+      "largeImageText": "Now playing",
+      "smallImage": "spotify_logo",
+      "smallImageText": "Spotify"
+    },
+    {
+      "name": "Coding Session",
+      "type": 0,
+      "details": "Editing index.js",
+      "state": "In workspace",
+      "largeImage": "vscode",
+      "largeImageText": "Visual Studio Code",
+      "smallImage": "nodejs",
+      "smallImageText": "Node.js"
+    }
+  ]
+}

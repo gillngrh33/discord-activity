@@ -12,46 +12,68 @@ if (!config) {
 const token = config.token;
 
 const client = new Client({ checkUpdate: false });
-
-// ── Daftar activity yang akan di-rotate ──────────────────────────────────────
+ 
 const activities = config.activities;
 let currentIndex = 0;
-
+ 
 function setActivity() {
   const act = activities[currentIndex];
-
+ 
+  const activityPayload = {
+    name: act.name,
+    type: act.type,
+    details: act.details || null,
+    state: act.state || null,
+    url: act.url || null,
+    application_id: config.applicationId,
+  };
+ 
+  // Tambahkan gambar kalau ada di config
+  if (act.largeImage || act.smallImage) {
+    activityPayload.assets = {};
+    if (act.largeImage) {
+      activityPayload.assets.large_image = act.largeImage;
+      activityPayload.assets.large_text = act.largeImageText || null;
+    }
+    if (act.smallImage) {
+      activityPayload.assets.small_image = act.smallImage;
+      activityPayload.assets.small_text = act.smallImageText || null;
+    }
+  }
+ 
+  // Tambahkan timestamps kalau ada
+  if (act.startTimestamp) {
+    activityPayload.timestamps = { start: act.startTimestamp === 'now' ? Date.now() : act.startTimestamp };
+  }
+ 
+  // Tambahkan buttons kalau ada (maks 2)
+  if (act.buttons && act.buttons.length > 0) {
+    activityPayload.buttons = act.buttons.slice(0, 2);
+  }
+ 
   client.user.setPresence({
-    status: config.status, // 'online' | 'idle' | 'dnd' | 'invisible'
-    activities: [
-      {
-        name: act.name,
-        type: act.type, // 0=Playing, 1=Streaming, 2=Listening, 3=Watching, 5=Competing
-        details: act.details || null,
-        state: act.state || null,
-        url: act.url || null, // Wajib diisi kalau type=1 (Streaming), harus URL Twitch/YT
-      },
-    ],
+    status: config.status,
+    activities: [activityPayload],
   });
-
-  console.log(`[${new Date().toLocaleTimeString()}] Activity set → ${act.name} (type ${act.type})`);
+ 
+  console.log(`[${new Date().toLocaleTimeString()}] Activity → ${act.name} | image: ${act.largeImage || 'none'}`);
   currentIndex = (currentIndex + 1) % activities.length;
 }
-
+ 
 client.on('ready', () => {
   console.log(`✅ Logged in as ${client.user.tag}`);
-  console.log(`🎮 Starting activity rotation every ${config.rotateIntervalMinutes} minute(s)...\n`);
-
-  // Set activity pertama langsung
+  console.log(`🎨 Application ID: ${config.applicationId}`);
+  console.log(`🔄 Rotating ${activities.length} activity setiap ${config.rotateIntervalMinutes} menit\n`);
+ 
   setActivity();
-
-  // Rotate activity sesuai interval (kalau activities > 1)
+ 
   if (activities.length > 1) {
     setInterval(setActivity, config.rotateIntervalMinutes * 60 * 1000);
   }
 });
-
+ 
 client.on('disconnect', () => {
   console.warn('⚠️  Disconnected. Reconnecting...');
 });
-
+ 
 client.login(config.token);
